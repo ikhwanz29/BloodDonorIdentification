@@ -1,16 +1,16 @@
 {
-    "builds": [{
-        "src": "proyek_donor_darah/wsgi.py",
-        "use": "@vercel/python",
-        "config": { 
-            "maxLambdaSize": "15mb",
-            "buildCommand": "chmod +x build.sh && ./build.sh"
+    "buildCommand": "pip install -r requirements.txt",
+    "framework": "django",
+    "functions": {
+        "api/wsgi.py": {
+            "maxDuration": 60
         }
-    }],
+    },
+    "outputDirectory": ".",
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "proyek_donor_darah/wsgi.py"
+            "dest": "api/wsgi.py"
         }
     ]
 }
