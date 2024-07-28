@@ -14,15 +14,15 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="{% url 'beranda' %}">WEBSITE CERDAS BERBASIS AI UNTUK IDENTIFIKASI DONOR DARAH</a>
+                <a href="{% url 'home' %}">SMART WEBSITE BASED AI FOR BLOOD DONOR IDENTIFICATION</a>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-links">
-                <li><a href="{% url 'beranda' %}" {% if request.resolver_match.url_name == 'beranda' %}class="active"{% endif %}>BERANDA</a></li>
-                <li><a href="{% url 'tentang' %}" {% if request.resolver_match.url_name == 'tentang' %}class="active"{% endif %}>TENTANG</a></li>
-                <li><a href="{% url 'identifikasi' %}" {% if request.resolver_match.url_name == 'identifikasi' %}class="active"{% endif %}>LAYANAN</a></li>
+                <li><a href="{% url 'home' %}" {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>HOME</a></li>
+                <li><a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>ABOUT</a></li>
+                <li><a href="{% url 'identification' %}" {% if request.resolver_match.url_name == 'identification' %}class="active"{% endif %}>SERVICES</a></li>
             </ul>
         </nav>
     </header>

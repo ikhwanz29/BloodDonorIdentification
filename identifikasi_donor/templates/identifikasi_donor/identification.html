@@ -1,7 +1,7 @@
 {% extends 'identifikasi_donor/base.html' %} {% block content %}
 <section class="content-section">
   <div class="container">
-      <h2 class="section-title">Identifikasi Kelayakan Donor Darah</h2>
+      <h2 class="section-title">Blood Donor Eligibility Identification</h2>
       <div class="form-container">
           <div class="image-column left">
               <img src="/static/img/left.png" alt="Ilustrasi Donor Darah" style="margin-left: -13px;">
@@ -14,7 +14,7 @@
                       {{ field }}
                   </div>
               {% endfor %}
-              <button type="submit" class="btn-submit">PERIKSA KELAYAKAN</button>
+              <button type="submit" class="btn-submit">CHECK ELIGIBILITY</button>
           </form>
           <div class="image-column right">
               <img src="/static/img/right.png" alt="Ilustrasi Donor Darah">
@@ -31,8 +31,8 @@
     e.preventDefault();
     
     Swal.fire({
-        title: 'Memproses...',
-        text: 'Mohon tunggu sebentar',
+        title: 'Processing...',
+        text: 'Please wait a moment',
         allowOutsideClick: false,
         showConfirmButton: false,
         willOpen: () => {
@@ -52,14 +52,14 @@
         .then(response => response.json())
         .then(data => {
             let icon, title, text;
-            if (data.prediksi === 'Layak') {
+            if (data.prediksi === 'Eligible') {
                 icon = 'success';
-                title = 'Selamat!';
-                text = 'Anda layak untuk mendonorkan darah.';
+                title = 'Congratulations!';
+                text = 'You are eligible to donate blood.';
             } else {
                 icon = 'warning';
-                title = 'Perhatian';
-                text = 'Maaf, Anda tidak layak mendonorkan darah saat ini.';
+                title = 'Attention';
+                text = 'Sorry, you are not eligible to donate blood at this time.';
             }
 
             Swal.fire({
@@ -75,11 +75,13 @@
                     popup: 'animate__animated animate__fadeOutUp'
                 }
             });
+            // Reset the form after successful submission
+            document.getElementById('donorForm').reset();
         })
         .catch(error => {
             Swal.fire({
                 title: 'Error!',
-                text: 'Terjadi kesalahan saat memproses data.',
+                text: 'An error occurred while processing the data.',
                 icon: 'error',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#D32F2F'

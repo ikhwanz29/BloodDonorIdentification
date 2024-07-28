@@ -4,13 +4,13 @@ from .forms import FormIdentifikasiDonor
 import joblib
 import numpy as np
 
-def beranda(request):
-    return render(request, 'identifikasi_donor/beranda.html')
+def home(request):
+    return render(request, 'identifikasi_donor/home.html')
 
-def tentang(request):
-    return render(request, 'identifikasi_donor/tentang.html')
+def about(request):
+    return render(request, 'identifikasi_donor/about.html')
 
-def identifikasi(request):
+def identification(request):
     if request.method == 'POST':
         form = FormIdentifikasiDonor(request.POST)
         if form.is_valid():
@@ -30,21 +30,21 @@ def identifikasi(request):
             # Normalisasi input data
             input_scaled = scaler.transform(input_data)
             
-            # Buat prediksi
-            prediksi = model.predict(input_scaled)[0]
-            hasil_prediksi = "Layak" if prediksi == 1 else "Tidak Layak"
-            icon = "success" if prediksi == 1 else "warning"
-            
+            # Make prediction
+            prediction = model.predict(input_scaled)[0]
+            prediction_result = "Eligible" if prediction == 1 else "Not Eligible"
+            icon = "success" if prediction == 1 else "warning"
+
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({
-                    'prediksi': hasil_prediksi,
+                    'prediksi': prediction_result,
                     'icon': icon
                 })
             else:
-                return render(request, 'identifikasi_donor/identifikasi.html', {
+                return render(request, 'identifikasi_donor/identification.html', {
                     'form': form,
-                    'prediksi': hasil_prediksi
+                    'prediksi': prediction_result
                 })
     else:
         form = FormIdentifikasiDonor()
-    return render(request, 'identifikasi_donor/identifikasi.html', {'form': form})
+    return render(request, 'identifikasi_donor/identification.html', {'form': form})
